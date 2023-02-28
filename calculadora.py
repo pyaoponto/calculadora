@@ -21,27 +21,27 @@ def calculate():
     display.delete(0, tk.END)
     display.insert(0, result)
 
-# Cria as teclas para os números
 number_buttons = []
 for i in range(1, 10):
     button = tk.Button(window, text=str(i), width=5, height=2, command=lambda i=i: update_display(i))
-    button.grid(row=(i-1)//3+1, column=(i-3)%3, padx=0, pady=1)
+    button.grid(row=(3 - (i-1)//3) + 1, column=(i-1)%3, padx=1, pady=1)
     number_buttons.append(button)
-tk.Button(window, text="0", width=5, height=2,
-          command=lambda: update_display("0")).grid(row=4, column=0, columnspan=1, padx=1, pady=1)
 
+# Botão do zero
+tk.Button(window, text="0", width=5, height=2, command=lambda: update_display("0")).grid(row=5, column=0, padx=1, pady=1)
 # Cria as teclas para as operações
 operator_buttons = []
-operators = ["+", "-", "*", "/"]
+operators = ["+", "-", "*"]
 for i in range(len(operators)):
     button = tk.Button(window, text=operators[i], width=5, height=2, 
                        command=lambda i=i: update_display(operators[i]))
-    button.grid(row=i+1, column=3, padx=1, pady=1)
+    button.grid(row=i+2, column=3, padx=1, pady=1)
     operator_buttons.append(button)
 # Cria as teclas = . AC e +/-
-tk.Button(window, text="=", width=5, height=2, command=calculate).grid(row=4, column=3, padx=1, pady=1)
-tk.Button(window, text=".", width=5, height=2, command=lambda: update_display(".")).grid(row=4, column=2, padx=1, pady=1)
-tk.Button(window, text="AC", width=5, height=2, command=lambda: display.delete(0, tk.END)).grid(row=1, column=0, padx=1, pady=1)
-tk.Button(window, text="+/-", width=5, height=2, command=lambda: update_display("-" + display.get())).grid(row=4, column=1, padx=1, pady=1)
+tk.Button(window, text="=", width=5, height=2, command=calculate).grid(row=5, column=3, padx=1, pady=1)
+tk.Button(window, text=".", width=5, height=2, command=lambda: update_display(".")).grid(row=5, column=2, padx=1, pady=1)
+tk.Button(window, text="AC", width=5, height=1, command=lambda: display.delete(0, tk.END)).grid(row=1, column=3, padx=1, pady=1)
+#tk.Button(window, text="+/-", width=5, height=2, command=lambda: update_display("-" + display.get())).grid(row=4, column=1, padx=1, pady=1)
+tk.Button(window, text="/", width=5, height=2, command=lambda: update_display("/")).grid(row=5, column=1, padx=1, pady=1)
 
 window.mainloop()
